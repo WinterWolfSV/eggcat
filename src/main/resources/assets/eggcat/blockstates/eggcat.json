@@ -1,0 +1,10 @@
+{
+  "variants": {
+    "powered=false": {
+      "model": "eggcat:block/eggcat"
+    },
+    "powered=true": {
+      "model": "eggcat:block/eggcat_powered"
+    }
+  }
+}
