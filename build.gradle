@@ -1,5 +1,5 @@
 plugins {
-    id 'fabric-loom' version "${gradle.properties.get("mod_version")}"
+    id 'fabric-loom' version '1.0-SNAPSHOT'
     id 'maven-publish'
 }
 
