@@ -1,16 +1,8 @@
 package net.winterwolfsv.eggcat.block.custom;
 
-import com.mojang.authlib.GameProfile;
-import net.fabricmc.fabric.api.object.builder.v1.block.FabricBlockSettings;
 import net.minecraft.block.*;
-import net.minecraft.block.entity.BlockEntity;
-import net.minecraft.block.entity.SkullBlockEntity;
-import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemPlacementContext;
-import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NbtCompound;
-import net.minecraft.nbt.NbtHelper;
 import net.minecraft.sound.SoundCategory;
 import net.minecraft.sound.SoundEvents;
 import net.minecraft.state.StateManager;
@@ -25,11 +17,8 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
-import org.apache.commons.lang3.StringUtils;
-import org.jetbrains.annotations.Nullable;
 
 import java.util.Objects;
-import java.util.UUID;
 
 
 public class EggcatBlock extends HorizontalFacingBlock {
@@ -39,7 +28,7 @@ public class EggcatBlock extends HorizontalFacingBlock {
     public static final BooleanProperty POWERED = BooleanProperty.of("powered");
 
     public EggcatBlock(Settings settings) {
-        super(FabricBlockSettings.of(Material.METAL).luminance((state) -> state.get(POWERED) ? 15 : 0));
+        super(settings.luminance((state) -> state.get(POWERED) ? 15 : 0));
         setDefaultState(getDefaultState().with(POWERED, false));
         setDefaultState(getDefaultState().with(Properties.HORIZONTAL_FACING, Direction.NORTH));
     }
@@ -56,23 +45,6 @@ public class EggcatBlock extends HorizontalFacingBlock {
             case EAST, WEST -> EAST_WEST_SHAPE;
             default -> VoxelShapes.fullCube();
         };
-    }
-
-    public void onPlaced(World world, BlockPos pos, BlockState state, @Nullable LivingEntity placer, ItemStack itemStack) {
-        super.onPlaced(world, pos, state, placer, itemStack);
-        BlockEntity blockEntity = world.getBlockEntity(pos);
-        if (blockEntity instanceof SkullBlockEntity skullBlockEntity) {
-            GameProfile gameProfile = null;
-            if (itemStack.hasNbt()) {
-                NbtCompound nbtCompound = itemStack.getNbt();
-                if (nbtCompound.contains("SkullOwner", 10)) {
-                    gameProfile = NbtHelper.toGameProfile(nbtCompound.getCompound("SkullOwner"));
-                } else if (nbtCompound.contains("SkullOwner", 8) && !StringUtils.isBlank(nbtCompound.getString("SkullOwner"))) {
-                    gameProfile = new GameProfile(null, nbtCompound.getString("SkullOwner"));
-                }
-            }
-            skullBlockEntity.setOwner(gameProfile);
-        }
     }
 
     @Override
