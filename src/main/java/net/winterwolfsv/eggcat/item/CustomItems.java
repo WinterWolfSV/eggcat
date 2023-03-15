@@ -1,9 +1,12 @@
 package net.winterwolfsv.eggcat.item;
 
+import net.fabricmc.fabric.api.dimension.v1.FabricDimensions;
 import net.fabricmc.fabric.api.item.v1.FabricItemSettings;
-import net.minecraft.block.Block;
+import net.fabricmc.fabric.api.itemgroup.v1.ItemGroupEvents;
 import net.minecraft.item.BlockItem;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemGroups;
+import net.minecraft.item.Items;
 import net.minecraft.registry.Registries;
 import net.minecraft.registry.Registry;
 import net.minecraft.util.Identifier;
@@ -11,21 +14,19 @@ import net.winterwolfsv.eggcat.Eggcat;
 import net.winterwolfsv.eggcat.block.CustomBlocks;
 
 public class CustomItems {
-    public static final Item EGGCAT = registerItem("eggcat",
-            new FabricItemSettings(), CustomBlocks.EGGCAT);
+    public static final Item EGGCAT = registerItem(new FabricItemSettings());
 
-    //Method to create a new item
-    private static Item registerItem(String name, Item item) {
-        return Registry.register(Registries.ITEM, new Identifier(Eggcat.MODID, name), item);
+
+    public static void registerItems() {
+        ItemGroupEvents.modifyEntriesEvent(ItemGroups.FUNCTIONAL).register(entries -> entries.addAfter(Items.DRAGON_EGG, EGGCAT));
     }
 
-    //Method to create a new block item (takes in Item.setting instead of Item)
-    private static Item registerItem(String name, Item.Settings settings, Block block) {
-        return Registry.register(Registries.ITEM, new Identifier(Eggcat.MODID, name), new BlockItem(block, settings));
+    private static Item registerItem(Item.Settings settings) {
+        return Registry.register(Registries.ITEM, new Identifier(Eggcat.MODID, "eggcat"), new BlockItem(CustomBlocks.EGGCAT, settings));
     }
-
 
     public static void registerModItems() {
+        registerItems();
     }
 
 }
