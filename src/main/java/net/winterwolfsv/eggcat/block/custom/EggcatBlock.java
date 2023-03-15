@@ -18,8 +18,6 @@ import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
 
-import java.util.Objects;
-
 
 public class EggcatBlock extends HorizontalFacingBlock {
     protected static final VoxelShape MAIN_SHAPE;
@@ -35,7 +33,7 @@ public class EggcatBlock extends HorizontalFacingBlock {
 
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
-        return Objects.requireNonNull(super.getPlacementState(ctx)).with(Properties.HORIZONTAL_FACING, ctx.getPlayerFacing().getOpposite());
+        return super.getPlacementState(ctx).with(Properties.HORIZONTAL_FACING, ctx.getHorizontalPlayerFacing().getOpposite());
     }
 
     @Override

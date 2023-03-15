@@ -1,7 +1,7 @@
 {
   "schemaVersion": 1,
   "id": "eggcat",
-  "version": "1.19.3",
+  "version": "1.0.2",
   "name": "Eggcat",
   "description": "The Eggcat Mod is a simple Minecraft mod that adds a new decorative block to the game: the Eggcat. This block serves as a light source that can be turned on and off by clicking it.",
   "authors": [
@@ -9,7 +9,7 @@
 	"Artist: Someone Different"
   ],
   "contact": {
-	"homepage": "https://github.com/WinterWolfSV/eggcat",
+	"homepage": "https://modrinth.com/mod/eggcat",
 	"sources": "https://github.com/WinterWolfSV/eggcat"
   },
   "license": "CC-BY-NC 4.0",
@@ -22,12 +22,9 @@
   },
   "mixins": [],
   "depends": {
-	"fabricloader": ">=0.14.9",
+	"fabricloader": "*",
 	"fabric-api": "*",
-	"minecraft": "~1.19",
+	"minecraft": "1.19.4",
 	"java": ">=17"
-  },
-  "suggests": {
-	"another-mod": "*"
   }
 }
