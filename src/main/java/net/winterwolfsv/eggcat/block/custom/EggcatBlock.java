@@ -49,10 +49,10 @@ public class EggcatBlock extends HorizontalFacingBlock {
     public ActionResult onUse(BlockState state, World world, BlockPos pos, PlayerEntity player, Hand hand, BlockHitResult hit) {
         if (!state.get(POWERED)) {
             world.setBlockState(pos, state.with(POWERED, true));
-            AbstractBlock.Settings.of(this.material).luminance(l -> 100);
+            AbstractBlock.Settings.copy(this.asBlock()).luminance(l -> 100);
         } else {
             world.setBlockState(pos, state.with(POWERED, false));
-            AbstractBlock.Settings.of(this.material).luminance(l -> 0);
+            AbstractBlock.Settings.copy(this.asBlock()).luminance(l -> 0);
         }
         world.playSound(null, pos, SoundEvents.BLOCK_LEVER_CLICK, SoundCategory.BLOCKS, 0.3F, 0.6f);
         return ActionResult.SUCCESS;
